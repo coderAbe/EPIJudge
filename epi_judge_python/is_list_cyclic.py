@@ -6,10 +6,37 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
-
 def has_cycle(head: ListNode) -> Optional[ListNode]:
-    # TODO - you fill in here.
-    return None
+
+    slow = fast = head
+
+    while True: 
+        if not fast or not fast.next:
+            return None
+        fast = fast.next.next
+        if slow is fast:
+            break
+        slow = slow.next
+        if slow is fast:
+            break;
+
+    cycle_size = 1
+    fast = fast.next 
+    while slow is not fast:
+        fast = fast.next
+        cycle_size += 1
+
+    fast = slow = head
+    for _ in range(0, cycle_size):
+        fast = fast.next
+
+    while slow is not fast:
+        fast = fast.next
+        if fast == slow:
+            break
+        slow = slow.next
+
+    return slow 
 
 
 @enable_executor_hook

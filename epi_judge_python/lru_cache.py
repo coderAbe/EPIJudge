@@ -4,12 +4,17 @@ from test_framework.test_failure import TestFailure
 
 class LruCache:
     def __init__(self, capacity: int) -> None:
-        # TODO - you fill in here.
+        self.dict = {}
+        self.start = 0
+        self.lru = []
         return
 
     def lookup(self, isbn: int) -> int:
-        # TODO - you fill in here.
-        return 0
+        current = self.dict[isbn] 
+        self.append(isbn)
+        
+        
+        return current[1]
 
     def insert(self, isbn: int, price: int) -> None:
         # TODO - you fill in here.

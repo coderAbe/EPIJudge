@@ -1,9 +1,21 @@
 from test_framework import generic_test
 
+import collections 
 
 def is_letter_constructible_from_magazine(letter_text: str,
                                           magazine_text: str) -> bool:
-    # TODO - you fill in here.
+
+    magazine_dict = collections.defaultdict(int)
+
+    for char in magazine_text:
+        magazine_dict[char] += 1
+
+    for char in letter_text:
+        if not magazine_dict[char]:
+            return False
+        else:
+            magazine_dict[char] -= 1
+
     return True
 
 

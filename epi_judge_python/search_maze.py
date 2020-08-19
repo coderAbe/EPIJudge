@@ -11,11 +11,51 @@ WHITE, BLACK = range(2)
 
 Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
+def name(a, b):
+    return Coordinate(x = a, y = b)
+
+def maze_to_graphs(maze):
+    graph = {}
+    for i in range(len(maze)):
+        for j in range(len(maze[i])):
+            if not maze[i][j]:
+                curr_vertex = name(i, j);
+                graph[curr_vertex] = ([])
+                if(i < len(maze) - 1 and not maze[i+1][j]):
+                    graph[curr_vertex].append(name(i+1, j)) 
+                if(i > 0 and not maze[i-1][j]):
+                    graph[curr_vertex].append(name(i-1, j)) 
+                if(j < len(maze[i]) - 1 and not maze[i][j+1]):
+                    graph[curr_vertex].append(name(i, j+1)) 
+                if(j > 0 and not maze[i][j-1]):
+                    graph[curr_vertex].append(name(i, j-1)) 
+    return graph
+
 
 def search_maze(maze: List[List[int]], s: Coordinate,
                 e: Coordinate) -> List[Coordinate]:
-    # TODO - you fill in here.
-    return []
+    path = [] 
+    def is_reachable(graph, curr, dest, visited=set()):
+        if curr == dest:
+            return True
+        elif curr in visited or curr not in graph:
+            return False
+        path.append(curr)
+        visited.add(curr)
+        if any(is_reachable(graph, node, dest, visited) for node in graph[curr]):
+            return True
+        del path[-1]
+        return False
+
+    graph = maze_to_graphs(maze)
+
+    is_reachable(graph, name(s.x, s.y), name(e.x, e.y))
+
+    if path:
+        path.append(e)
+
+
+    return path
 
 
 def path_element_is_feasible(maze, prev, cur):

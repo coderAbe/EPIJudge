@@ -11,44 +11,44 @@ RED, WHITE, BLUE = range(3)
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
     pivot = A[pivot_index]
 
-    lower, equal, bigger = 0, 0, len(A) - 1
+    start, current, end = 0, 0, len(A) - 1
 
-    while equal <= bigger:
-        if A[equal] < pivot:
-            A[lower], A[equal] = A[equal], A[lower]
-            lower+=1
-            equal+=1
-        elif A[equal] > pivot: 
-            A[equal], A[bigger] = A[bigger], A[equal]
-            bigger-=1
+    while current <= end:
+        if A[current] < pivot:
+            A[start], A[current] = A[current], A[start]
+            start+=1
+            current+=1
+        elif A[current] > pivot: 
+            A[current], A[end] = A[end], A[current]
+            end-=1
         else: 
-            equal+=1
+            current+=1
 
 
 
 #  def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
-    #  lower, bigger = 0, len(A) - 1
+    #  start, end = 0, len(A) - 1
     #  pivot = A[pivot_index]
 
-    #  while lower < bigger:
-        #  if A[lower] <= pivot:
-            #  lower += 1
+    #  while start < end:
+        #  if A[start] <= pivot:
+            #  start += 1
         #  else:
-            #  A[lower], A[bigger] = A[bigger], A[lower]
-            #  bigger -= 1
+            #  A[start], A[end] = A[end], A[start]
+            #  end -= 1
 
 
-    #  if A[bigger] > pivot:
-        #  bigger -= 1
+    #  if A[end] > pivot:
+        #  end -= 1
 
-    #  lower, equal = 0, bigger 
+    #  start, current = 0, end 
 
-    #  while lower < equal:
-        #  if A[equal] == pivot:
-            #  equal -= 1
+    #  while start < current:
+        #  if A[current] == pivot:
+            #  current -= 1
         #  else:
-            #  A[lower], A[equal] = A[equal], A[lower]
-            #  lower += 1
+            #  A[start], A[current] = A[current], A[start]
+            #  start += 1
 
 
 @enable_executor_hook

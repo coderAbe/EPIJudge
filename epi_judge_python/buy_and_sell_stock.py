@@ -16,7 +16,7 @@ def buy_and_sell_stock_once(prices: List[float]) -> float:
     return maxDiff 
 
 
-def max_continous_subarray (numbers: List{float]) -> float:
+def max_continous_subarray (numbers: List[float]) -> float:
     max_len = 0
     current_len = 1
     current_num = numbers[0]

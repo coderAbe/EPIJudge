@@ -7,10 +7,19 @@ from test_framework.random_sequence_checker import (
     compute_combination_idx, run_func_with_retries)
 from test_framework.test_utils import enable_executor_hook
 
+import random
+
 
 def random_sampling(k: int, A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+
+    for i in range(0, k):
+        # choose random idx
+        random_idx = random.randint(i, len(A) - 1)
+        
+        # swap random idx with beginning
+        A[random_idx], A[i] = A[i], A[random_idx]
+
+    return A
 
 
 @enable_executor_hook
